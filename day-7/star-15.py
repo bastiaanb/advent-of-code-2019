@@ -87,13 +87,17 @@ class IntCode:
 def amplify_signal(code, signal = 0):
     amps = [ IntCode(input, [int(code[i])] ) for i in range(0, 5) ]
     done = False
+    round = 0
     while not done:
         for i in range(0, 5):
+            round += 1
             amps[i].input.append(signal)
             done = amps[i].run()
             signal = amps[i].output.pop(0)
 
-    return signal
+    return { 'signal': signal, 'rounds': round, 'mem': sum([len(amp.mem) for amp in amps]) }
 
 signals = [ amplify_signal(code) for code in permutations('56789') ]
-print(max(signals))
+print(f"signal: {max([s['signal'] for s in signals])}")
+print(f"rounds: {max([s['rounds'] for s in signals])}")
+print(f"mem: {max([s['mem'] for s in signals])}")
