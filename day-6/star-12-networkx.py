@@ -12,5 +12,5 @@ for line in fileinput.input():
 s = sum([len(nx.shortest_path(objects, "COM", x)) - 1 for x in objects.nodes])
 print(f"star 12: {s}")
 
-l = len(nx.shortest_path(objects, "YOU", "SAN")) - 2
+l = len(nx.shortest_path(objects, "YOU", "SAN")) - 3
 print(f"star 13: {l}")
